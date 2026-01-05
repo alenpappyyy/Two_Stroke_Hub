@@ -1,0 +1,14 @@
+<h1>My Watchlist</h1>
+
+{% if items %}
+  <ul>
+    {% for item in items %}
+      <li>
+        {{ item.bike.name }}
+        <a href="{% url 'watchlist:remove' item.bike.id %}">Remove</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Your watchlist is empty.</p>
+{% endif %}

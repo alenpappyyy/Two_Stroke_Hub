@@ -1,0 +1,688 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TwoStrokeHub - Home</title>
+
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background-color: #0f0f0f;
+        }
+    </style>
+
+
+</head>
+
+<body class="text-white">
+
+    <!-- NAVBAR -->
+    <header class="absolute top-0 left-0 w-full z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center py-6 px-8">
+
+            <!-- LOGO -->
+            <h1 class="text-2xl font-bold">
+                <span class="text-orange-500">TWO</span>STROKEHUB
+            </h1>
+
+            <!-- MENU -->
+            <nav class="hidden md:flex space-x-6 text-gray-200">
+
+                <a href="{% url 'home:home' %}" class="hover:text-orange-500">Home</a>
+
+                <!-- MARKETPLACE DROPDOWN -->
+                <div class="relative group">
+                    <button class="flex items-center font-semibold hover:text-orange-500">
+                        Marketplace
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.958a.75.75 0 111.08 1.04l-4.25 4.53a.75.75 0 01-1.08 0l-4.25-4.53a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div class="absolute left-0 mt-2 w-32 bg-neutral-900 rounded-lg shadow-lg opacity-0 
+                            invisible group-hover:opacity-100 group-hover:visible transition duration-200">
+                        <a href="/bikes/" class="block px-4 py-2 text-gray-300 hover:bg-neutral-800 rounded-lg">
+                            Bikes
+                        </a>
+
+
+                        <a href="/parts/" class="block px-4 py-2 text-gray-300 hover:bg-neutral-800 rounded-lg">
+                            parts
+                        </a>
+
+                    </div>
+                </div>
+
+                <a href="{% url 'services:home' %}" class="hover:text-orange-500">
+                    Services
+                </a>
+
+                <!-- COMMUNITY DROPDOWN -->
+                <div class="relative group">
+                    <button class="flex items-center font-semibold hover:text-orange-500">
+                        Community
+                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.188l3.71-3.958a.75.75 0 111.08 1.04l-4.25 4.53a.75.75 0 01-1.08 0l-4.25-4.53a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div class="absolute left-0 mt-2 w-32 bg-neutral-900 rounded-lg shadow-lg opacity-0 
+                            invisible group-hover:opacity-100 group-hover:visible transition duration-200">
+                        <a href="/parts/" class="block px-4 py-2 text-gray-300 hover:bg-neutral-800 rounded-lg">
+                            Blog
+                        </a>
+
+
+
+                        <a href="{% url 'forum:forum_home' %}"
+                            class="block px-4 py-2 text-gray-300 hover:bg-neutral-800 rounded-lg">
+                            Forum
+                        </a>
+
+                    </div>
+                </div>
+
+                <a href="{% url 'support:home' %}" class="hover:text-orange-500">Support</a>
+
+            </nav>
+
+            <a href="{% url 'dashboard:dashboard' %}" class="bg-white text-black px-4 py-2 rounded-md font-semibold">
+                Dashboard
+            </a>
+
+
+
+        </div>
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="relative w-full h-screen">
+        <img src="{% static 'img/hero-bike.jpg' %}" class="absolute top-0 left-0 w-full h-full object-cover opacity-70">
+
+        <div class="absolute inset-0 flex flex-col justify-center items-start px-10 max-w-4xl">
+            <span class="text-orange-400 font-semibold text-md mb-3">
+                THE ULTIMATE 2-STROKE PLATFORM
+            </span>
+
+            <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+                Reviving the Legend<br>
+                of <span class="text-orange-500">Two Strokes</span>
+            </h1>
+
+            <p class="mt-4 text-lg text-gray-300">
+                Join the largest community of 2-stroke enthusiasts.
+                From vintage restoration to modern builds — we cover it all.
+            </p>
+
+            <div class="mt-6 flex space-x-4">
+                <button class="bg-orange-600 px-6 py-3 rounded-lg font-semibold hover:bg-orange-500">
+                    Join the Community
+                </button>
+
+                <button class="border border-gray-300 px-6 py-3 rounded-lg hover:bg-white hover:text-black">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED SECTION -->
+    <section class="bg-black py-16">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <h2 class="text-3xl font-bold mb-6">Featured Two Strokes</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+                <!-- CARD 1 -->
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/OLD.png' %}" class="rounded-lg mb-3">
+                    <h3 class="text-lg font-bold">TWO STROKE</h3>
+                    <p class="text-gray-400 text-sm">TT600 Custom Build</p>
+                    <p class="mt-2 text-orange-500 font-semibold">$29,800</p>
+                </div>
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/RD360.png' %}" class="rounded-lg mb-3">
+                    <h3 class="text-lg font-bold">TWO STROKE</h3>
+                    <p class="text-gray-400 text-sm">Vintage Build</p>
+                    <p class="mt-2 text-orange-500 font-semibold">$33,900</p>
+                </div>
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/RM250.png' %}" class="rounded-lg mb-3">
+                    <h3 class="text-lg font-bold">TWO STROKE</h3>
+                    <p class="text-gray-400 text-sm">Racing Edition</p>
+                    <p class="mt-2 text-orange-500 font-semibold">$38,800</p>
+                </div>
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/RX100.png' %}" class="rounded-lg mb-3">
+                    <h3 class="text-lg font-bold">TWO STROKE</h3>
+                    <p class="text-gray-400 text-sm">Trail Modified</p>
+                    <p class="mt-2 text-orange-500 font-semibold">$39,960</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKETPLACE SECTION -->
+    <section class="bg-neutral-950 py-20">
+        <div class="max-w-7xl mx-auto grid grid-cols-12 gap-6 px-6">
+
+
+
+            <!-- LEFT SIDEBAR -->
+            <aside class="col-span-12 md:col-span-3 space-y-6">
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/RXZ!.png' %}" class="rounded-lg mb-3">
+                    <h3 class="font-bold">TWO STROKE</h3>
+                    <p class="text-gray-400 text-sm">TT600 Enduro</p>
+                    <p class="text-orange-500 mt-2">$29,000</p>
+                </div>
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/sbike.png' %}" class="rounded-lg mb-3">
+                    <h3 class="font-bold">TWO STROKE</h3>
+                    <p class="text-gray-400 text-sm">Enduro Edition</p>
+                    <p class="text-orange-500 mt-2">$22,800</p>
+                </div>
+
+            </aside>
+
+            <!-- CENTER AREA -->
+            <main class="col-span-12 md:col-span-6 space-y-10">
+
+                <!-- MEGAMART -->
+                <div class="bg-neutral-900 p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-bold mb-4 uppercase">MEGAMART</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                        <div class="bg-neutral-800 p-3 rounded-lg">
+                            <img src="{% static 'img/YZ85.png' %}" class="rounded mb-2">
+                            <h3 class="font-bold text-sm">TWO STROKE</h3>
+                            <p class="text-gray-400 text-xs">TT500 Pro</p>
+                            <p class="text-orange-500">$31,000</p>
+                        </div>
+
+                        <div class="bg-neutral-800 p-3 rounded-lg">
+                            <img src="{% static 'img/OLD.png' %}" class="rounded mb-2">
+                            <h3 class="font-bold text-sm">TWO STROKE</h3>
+                            <p class="text-gray-400 text-xs">Pro Rally</p>
+                            <p class="text-orange-500">$38,000</p>
+                        </div>
+
+                        <div class="bg-neutral-800 p-3 rounded-lg">
+                            <img src="{% static 'img/Yamaha XT250.jpg' %}" class="rounded mb-2">
+                            <h3 class="font-bold text-sm">TWO STROKE</h3>
+                            <p class="text-gray-400 text-xs">Trail Version</p>
+                            <p class="text-orange-500">$23,000</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- MSAMART -->
+                <div class="bg-neutral-900 p-6 rounded-lg shadow">
+                    <h2 class="text-xl font-bold mb-4 uppercase">MSAMART</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                        <div class="bg-neutral-800 p-3 rounded-lg">
+                            <img src="{% static 'img/RX100.png' %}" class="rounded mb-2">
+                            <h3 class="font-bold text-sm">TWO STROKE</h3>
+                            <p class="text-gray-400 text-xs">TS200</p>
+                            <p class="text-orange-500">$19,000</p>
+                        </div>
+
+                        <div class="bg-neutral-800 p-3 rounded-lg">
+                            <img src="{% static 'img/sbike.png' %}" class="rounded mb-2">
+                            <h3 class="font-bold text-sm">TWO STROKE</h3>
+                            <p class="text-gray-400 text-xs">sbike</p>
+                            <p class="text-orange-500">$24,000</p>
+                        </div>
+
+                        <div class="bg-neutral-800 p-3 rounded-lg">
+                            <img src="{% static 'img/YZ85.png' %}" class="rounded mb-2">
+                            <h3 class="font-bold text-sm">TWO STROKE</h3>
+                            <p class="text-gray-400 text-xs">Workshop Build</p>
+                            <p class="text-orange-500">$21,000</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- RIGHT SIDEBAR -->
+            <aside class="col-span-12 md:col-span-3 space-y-6">
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <img src="{% static 'img/KX500.png' %}" class="rounded mb-3">
+                    <h3 class="font-bold text-xl mb-2">BLOG</h3>
+                    <p class="text-gray-400 text-sm">
+                        Latest updates, restoration tips, tuning tutorials and more.
+                    </p>
+                </div>
+
+                <div class="bg-neutral-900 p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-xl mb-2">Owner's Group</h3>
+                    <ul class="space-y-3 text-gray-300 text-sm">
+                        <li class="hover:text-orange-500 cursor-pointer">Riders Meetup 2025</li>
+                        <li class="hover:text-orange-500 cursor-pointer">Upcoming Events</li>
+                        <li class="hover:text-orange-500 cursor-pointer">Restoration Stories</li>
+                        <li class="hover:text-orange-500 cursor-pointer">Buy/Sell Advice</li>
+                    </ul>
+                </div>
+
+            </aside>
+        </div>
+    </section>
+
+
+    <section class="bg-black py-20">
+
+        <!-- HERO SECTION -->
+        <section class="bg-black text-white w-full">
+            <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center px-6 py-20">
+
+                <!-- LEFT SIDE IMAGE -->
+                <div class="w-full">
+                    <img src="/static/img/engine.jpg" alt="Two Stroke Engine"
+                        class="rounded-lg w-full h-[550px] object-cover shadow-lg">
+                </div>
+
+                <!-- RIGHT SIDE TEXT -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+                        Passionate About<br>
+                        <span class="text-red-500">Two Stroke Power</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Two Stroke Hub was born from a passion for the unique sound, smell, and power
+                        delivery of two-stroke engines. In a world moving towards electrification and
+                        four-strokes, we stand as a sanctuary for the smokers. Our mission is to preserve
+                        the heritage of two-stroke motorcycles while pushing the technology forward
+                        through community knowledge sharing.
+                    </p>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-2 gap-8 mt-10">
+
+                        <div>
+                            <h2 class="text-4xl font-bold">15k+</h2>
+                            <p class="text-gray-400 text-sm tracking-widest">MEMBERS</p>
+                        </div>
+
+                        <div>
+                            <h2 class="text-4xl font-bold">45</h2>
+                            <p class="text-gray-400 text-sm tracking-widest">COUNTRIES</p>
+                        </div>
+
+                        <div>
+                            <h2 class="text-4xl font-bold">500+</h2>
+                            <p class="text-gray-400 text-sm tracking-widest">EVENTS</p>
+                        </div>
+
+                        <div>
+                            <h2 class="text-4xl font-bold">1,200+</h2>
+                            <p class="text-gray-400 text-sm tracking-widest">BIKES SAVED</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Everything You Need to Ride Section -->
+        <section class="bg-[#0A0A0A] text-white py-20 px-6 md:px-16">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    Everything You Need to <span class="text-orange-500">Ride</span>
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Whether you're a seasoned mechanic or just bought your first smoker,
+                    we've got the tools and community to keep you going.
+                </p>
+            </div>
+
+            <!-- Cards Container -->
+            <div class="grid md:grid-cols-3 gap-8 mt-16">
+
+                <!-- Card 1 -->
+                <div class="relative rounded-2xl overflow-hidden bg-[#121212] shadow-lg">
+                    <img src="/static/img/community.jpg" alt="Community Riders"
+                        class="h-64 w-full object-cover opacity-80">
+                    <div class="p-6">
+                        <div class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            🌐
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Global Community</h3>
+                        <p class="text-gray-400">
+                            Connect with riders and mechanics from around the world.
+                            Share your builds and rides.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="relative rounded-2xl overflow-hidden bg-[#121212] shadow-lg">
+
+                    <img src="/static/img/maintenance.jpg" alt="Maintenance"
+                        class="h-64 w-full object-cover opacity-80">
+                    <div class="p-6">
+                        <div class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            🔧
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Expert Maintenance</h3>
+                        <p class="text-gray-400">
+                            Access detailed guides, manuals, and expert advice for keeping your 2-stroke running crisp.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="relative rounded-2xl overflow-hidden bg-[#121212] shadow-lg">
+                    <img src="/static/img/parts marketplace.jpg" alt="Parts Marketplace"
+                        class="h-64 w-full object-cover opacity-80">
+                    <div class="p-6">
+                        <div class="bg-orange-500 w-12 h-12 flex items-center justify-center rounded-xl mb-4">
+                            🛒
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-2">Parts Marketplace</h3>
+                        <p class="text-gray-400">
+                            Find rare parts and bikes. Buy, sell, and trade with trusted members of the community.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bg-black text-white py-16 px-6 md:px-20">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <p class="text-orange-500 font-semibold tracking-wide">LATEST NEWS</p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mt-2">
+                        From the Garage<span class="text-gray-400"></span>
+                    </h2>
+                </div>
+
+                <a href="#" class="text-gray-300 hover:text-white flex items-center gap-2">
+                    View All Posts <span>→</span>
+                </a>
+            </div>
+
+            <!-- Blog Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+                <!-- BLOG CARD 1 -->
+                <div class="bg-[#121212] rounded-xl border border-gray-800 overflow-hidden">
+                    <img src="/static/img/blog1.jpg" alt="Blog Image" class="w-full h-64 object-cover">
+
+                    <div class="p-6">
+                        <span class="bg-orange-600 text-white text-xs px-3 py-1 rounded-full">Tech</span>
+
+                        <div class="flex items-center text-gray-400 text-sm mt-4 gap-3">
+                            <span>📅 Nov 24, 2025</span>
+                            <span>•</span>
+                            <span>Mike 'The Wrench'</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-4">Understanding the Power Valve System</h3>
+
+                        <p class="text-gray-400 text-sm mt-2">
+                            A deep dive into how power valves work and how to tune them for maximum performance.
+                        </p>
+
+                        <a href="#" class="text-orange-500 font-semibold inline-block mt-4">
+                            Read Article →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BLOG CARD 2 -->
+                <div class="bg-[#121212] rounded-xl border border-gray-800 overflow-hidden">
+                    <img src="/static/img/blog2.jpg" alt="Blog Image" class="w-full h-64 object-cover">
+
+                    <div class="p-6">
+                        <span class="bg-orange-600 text-white text-xs px-3 py-1 rounded-full">Restoration</span>
+
+                        <div class="flex items-center text-gray-400 text-sm mt-4 gap-3">
+                            <span>📅 Nov 20, 2025</span>
+                            <span>•</span>
+                            <span>Sarah Speed</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-4">Restoring a Vintage Kawasaki KX500</h3>
+
+                        <p class="text-gray-400 text-sm mt-2">
+                            Follow along as we bring this beast back to life. Part 1: The Teardown.
+                        </p>
+
+                        <a href="#" class="text-orange-500 font-semibold inline-block mt-4">
+                            Read Article →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- BLOG CARD 3 -->
+                <div class="bg-[#121212] rounded-xl border border-gray-800 overflow-hidden">
+                    <img src="/static/img/blog3.jpg" alt="Blog Image" class="w-full h-64 object-cover">
+
+                    <div class="p-6">
+                        <span class="bg-orange-600 text-white text-xs px-3 py-1 rounded-full">Reviews</span>
+
+                        <div class="flex items-center text-gray-400 text-sm mt-4 gap-3">
+                            <span>📅 Nov 15, 2025</span>
+                            <span>•</span>
+                            <span>Tech Team</span>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-4">Top 5 Premix Oils for 2025</h3>
+
+                        <p class="text-gray-400 text-sm mt-2">
+                            We tested the top oils to find the best protection and cleanest burn for your engine.
+                        </p>
+
+                        <a href="#" class="text-orange-500 font-semibold inline-block mt-4">
+                            Read Article →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="max-w-4xl mx-auto text-center px-6">
+
+            <!-- Title -->
+            <h2 class="text-4xl font-extrabold text-white mb-4 tracking-wide">
+                Get in Touch
+            </h2>
+
+            <!-- Subtitle -->
+            <p class="text-gray-400 mb-12">
+                Have a question about a build? Want to join the team? Drop us a line.
+            </p>
+
+            <!-- Form Container -->
+            <div class="bg-zinc-900 p-10 rounded-2xl shadow-lg">
+                <form class="space-y-8">
+
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-left text-gray-300 mb-2 font-medium">Name</label>
+                        <input type="text" placeholder="John Doe"
+                            class="w-full px-4 py-3 bg-zinc-800 text-white rounded-xl outline-none focus:ring-2 focus:ring-orange-500" />
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-left text-gray-300 mb-2 font-medium">Email</label>
+                        <input type="email" placeholder="john@example.com"
+                            class="w-full px-4 py-3 bg-zinc-800 text-white rounded-xl outline-none focus:ring-2 focus:ring-orange-500" />
+                    </div>
+
+                    <!-- Message -->
+                    <div>
+                        <label class="block text-left text-gray-300 mb-2 font-medium">Message</label>
+                        <textarea rows="6" placeholder="Tell us about your project..."
+                            class="w-full px-4 py-3 bg-zinc-800 text-white rounded-xl outline-none focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition">
+                        <!-- Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                                d="M3 10l9-6 9 6m-9-6v14" />
+                        </svg>
+                        Send Message
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- footer -->
+    <footer class="bg-black text-gray-300 py-16 px-6 md:px-20 lg:px-32">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <!-- Logo + Description -->
+            <div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-orange-500 text-3xl">🏍️</span>
+                    <h1 class="text-white text-2xl font-bold">TWOSTROKE<span class="text-orange-500">HUB</span></h1>
+                </div>
+
+                <p class="mt-4 text-gray-400 leading-relaxed">
+                    The ultimate platform for two-stroke enthusiasts.
+                    Connect, learn, and ride.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="flex space-x-4 mt-6">
+
+                    <a href="https://instagram.com" target="_blank"
+                        class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                        <img src="{% static 'social/instagram.jpg' %}" alt="Instagram" class="w-6 h-6 object-contain">
+                    </a>
+
+                    <a href="https://facebook.com" target="_blank"
+                        class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                        <img src="{% static 'social/facebook.jpg' %}" alt="Facebook" class="w-6 h-6 object-contain">
+                    </a>
+
+                    <a href="https://twitter.com" target="_blank"
+                        class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                        <img src="{% static 'social/twitter.jpg' %}" alt="Twitter" class="w-6 h-6 object-contain">
+                    </a>
+
+                    <a href="https://youtube.com" target="_blank"
+                        class="p-3 bg-gray-800 rounded-full hover:bg-gray-700 transition">
+                        <img src="{% static 'social/youtube.jpg' %}" alt="YouTube"
+                            class="w-6 h-6 object-contain invert">
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+           <ul class="space-y-3 text-gray-300">
+<li>
+    <a href="{% url 'home' %}" class="hover:text-white">
+        Home
+    </a>
+</li>
+
+ 
+        <li><a href="{% url 'pages:about' %}" class="hover:text-white">About</a></li>
+
+
+    <li>
+        <a href="{% url 'services:home' %}" class="hover:text-white">
+            Features
+        </a>
+    </li>
+    <li>
+        <a href="/blog/" class="hover:text-white">
+            Blog
+        </a>
+    </li>
+    <li><a href="{% url 'pages:contact' %}" class="hover:text-white">Contact</a></li>
+
+</ul>
+
+
+            <!-- Resources -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-4">Resources</h3>
+                <ul class="space-y-3">
+                    <li><a href="#" class="hover:text-white">Maintenance Guides</a></li>
+                    <li><a href="#" class="hover:text-white">Parts Catalog</a></li>
+                    <li><a href="#" class="hover:text-white">Community Forum</a></li>
+                    <li><a href="#" class="hover:text-white">Events Calendar</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Us -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-4">Contact Us</h3>
+
+                <div class="flex items-start space-x-3 mb-4">
+                    <span class="text-orange-500 text-xl">📍</span>
+                    <p class="text-gray-400">
+                        123 Piston Way, Cylinder City<br>
+                        Moto State, 90210
+                    </p>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                    <span class="text-orange-500 text-xl">✉️</span>
+                    <p class="text-gray-400">hello@twostrokehub.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div
+            class="border-t border-gray-800 mt-12 pt-6 flex flex-col md:flex-row justify-between text-sm text-gray-400">
+            <p>© 2025 Two Stroke Hub. All rights reserved.</p>
+
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

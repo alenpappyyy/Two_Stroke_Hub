@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+
+    <!-- Brand -->
+<a class="navbar-brand" href="{% url 'pages:home' %}">
+    Two Stroke Hub
+</a>
+
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Menu -->
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <!-- Bikes -->
+        <li class="nav-item">
+  <a class="nav-link" href="{% url 'bikes:bike_list' %}">Bikes</a>
+</li>
+
+        <!-- Parts -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'parts:parts_store' %}">Parts</a>
+        </li>
+
+        <!-- Services -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'services:home' %}">Services</a>
+        </li>
+
+        <!-- Marketplace Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="marketDropdown" role="button" data-bs-toggle="dropdown">
+            Marketplace
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li>
+              <a class="dropdown-item" href="{% url 'parts:parts_store' %}">
+                Parts Store
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'bikes:bike_list' %}">
+                Bikes
+              </a>
+            </li>
+            <li>
+              <span class="dropdown-item disabled">Accessories (Coming Soon)</span>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Seller Only -->
+        {% if is_seller %}
+        <li class="nav-item ms-lg-3">
+          " class="btn btn-warning fw-semibold">
+            + Add Bike
+          </a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>

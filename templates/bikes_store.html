@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="min-h-screen bg-black text-white px-10 py-20">
+    <!-- Title & Search -->
+    <div class="flex items-center justify-between mb-12">
+        <div>
+            <h1 class="text-5xl font-extrabold">Bike Marketplace</h1>
+            <p class="text-gray-400 mt-2">Find your dream 2-stroke machine.</p>
+        </div>
+
+        <!-- Search + Filter -->
+        <div class="flex gap-3">
+            <form method="GET" action="">
+                <input type="text" name="search" placeholder="Search bikes..."
+                    class="bg-[#111] border border-gray-700 rounded-xl px-4 py-2 focus:outline-none w-72">
+            </form>
+            <button class="bg-[#111] border border-gray-700 rounded-xl px-3">
+                <i class="fa fa-filter text-gray-400"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bikes List Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-10">
+        {% for bike in bikes %}
+        <div class="bg-[#0f0f0f] rounded-xl shadow-xl overflow-hidden border border-gray-800 hover:scale-105 transition duration-300">
+            
+            <!-- Image -->
+            <div class="relative">
+                <img src="{{ bike.image.url }}" alt="{{ bike.name }}" class="h-72 w-full object-cover">
+                <span class="absolute top-3 right-3 bg-orange-500 text-black font-bold text-sm px-3 py-1 rounded-lg">
+                    ${{ bike.price }}
+                </span>
+            </div>
+
+            <!-- Info -->
+            <div class="p-6">
+                <h2 class="text-xl font-semibold">{{ bike.name }}</h2>
+
+                <div class="flex items-center text-sm text-gray-400 gap-4 mt-3">
+                    <span class="flex items-center gap-1">
+                        <i class="fa fa-calendar"></i> {{ bike.year }}
+                    </span>
+                    <span class="flex items-center gap-1">
+                        <i class="fa fa-location-dot"></i> {{ bike.location }}
+                    </span>
+                </div>
+
+                <!-- View Details -->
+                <a href="{% url 'bike_detail' bike.id %}">
+                    <button class="w-full mt-6 bg-white text-black py-2 rounded-lg font-semibold hover:bg-gray-300 transition">
+                        View Details
+                    </button>
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- If no bikes found -->
+    {% if bikes|length == 0 %}
+        <div class="text-center text-gray-500 mt-20 text-xl">No bikes found.</div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
