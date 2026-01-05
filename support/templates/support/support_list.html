@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Support Tickets — TwoStrokeHub{% endblock %}
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold">Support</h1>
+  <a href="{% url 'support:create' %}" class="bg-blue-600 text-white px-4 py-2 rounded">Create Ticket</a>
+</div>
+
+<div class="space-y-4">
+  {% for ticket in tickets %}
+    <div class="card p-4">
+      <a href="{% url 'support:detail' ticket.pk %}" class="text-lg font-semibold">{{ ticket.subject }}</a>
+      <p class="text-sm text-gray-500">{{ ticket.created_at }}</p>
+      <p class="mt-2 text-gray-700">{{ ticket.summary }}</p>
+    </div>
+  {% empty %}
+    <p>No tickets yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

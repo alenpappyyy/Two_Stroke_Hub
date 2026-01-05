@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-4">Services</h1>
+
+<!-- Category Filter -->
+<div class="flex gap-4 mb-6 flex-wrap">
+  <a href="{% url 'services:services_list' %}"
+     class="{% if not active_category %}font-bold text-orange-500{% endif %}">
+     All
+  </a>
+
+  {% for category in categories %}
+    <a href="{% url 'services:category_services' category.slug %}"
+       class="{% if active_category == category %}font-bold text-orange-500{% endif %}">
+       {{ category.name }}
+    </a>
+  {% endfor %}
+</div>
+
+<!-- Services Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {% for service in services %}
+    <div class="border p-4 rounded shadow">
+      <h2 class="font-semibold">{{ service.name }}</h2>
+      <p class="text-sm text-gray-600">{{ service.category.name }}</p>
+      <p>{{ service.description|truncatechars:80 }}</p>
+      <p class="font-bold">₹{{ service.price }}</p>
+
+      <a href="{% url 'services:book_service' service.id %}"
+         class="mt-2 inline-block bg-orange-500 text-white px-4 py-2 rounded">
+         Book Service
+      </a>
+    </div>
+  {% empty %}
+    <p>No services found.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

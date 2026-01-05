@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="min-h-screen bg-[#0f0f0f] text-white py-12 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Support Admin</h1>
+
+    <div class="space-y-4">
+      {% for t in tickets %}
+      <div class="bg-[#171717] p-4 rounded border border-gray-800 flex justify-between items-center">
+        <div>
+          <a href="{% url 'support:admin_ticket_detail' t.id %}" class="text-lg font-semibold hover:underline">{{ t.subject }}</a>
+          <div class="text-sm text-gray-400">By {{ t.user.username }} • {{ t.created_at|date:"M d, Y H:i" }}</div>
+        </div>
+        <div>
+          <div class="text-sm text-gray-400">{{ t.status|capfirst }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

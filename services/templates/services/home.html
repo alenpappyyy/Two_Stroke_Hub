@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen bg-black text-white py-20 px-10">
+
+    <h1 class="text-5xl font-extrabold text-center">Service & Repair</h1>
+    <p class="text-gray-400 text-center mt-3 text-lg">
+        Expert care for your machine. From simple washes to full engine rebuilds.
+    </p>
+
+    <!-- Service Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 mt-16">
+
+        <!-- Premium Engine Wash -->
+        <div class="bg-[#0f0f0f] rounded-xl border border-gray-800 shadow-xl overflow-hidden">
+          <img src="{% static 'image/wash.jpg' %}"class="h-64 w-full object-cover opacity-90">
+
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold">Premium Engine Wash</h2>
+                <p class="text-gray-400 mt-3">
+                    Deep cleaning of engine components, degreasing, and polishing.
+                </p>
+
+                <div class="flex justify-between items-center text-gray-300 mt-4">
+                    <span class="flex gap-2 items-center">
+                        <i class="fa fa-clock"></i> 2 hours
+                    </span>
+                    <span class="text-orange-500 text-xl font-bold">$50</span>
+                </div>
+
+                <!-- FIX APPLIED HERE -->
+              <a href="{% url 'services:book_service' 1 %}"
+   class="w-full block text-center bg-white text-black mt-6 py-2 rounded-lg font-bold hover:bg-gray-300 transition">
+    <i class="fa fa-calendar"></i> Book Now
+</a>
+
+
+            </div>
+        </div>
+
+        <!-- Carburetor Tuning -->
+        <div class="bg-[#0f0f0f] rounded-xl border border-gray-800 shadow-xl overflow-hidden">
+           <img src="{% static 'image/Tuning.jpg' %}" class="h-64 w-full object-cover opacity-90">
+
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold">Carburetor Tuning</h2>
+                <p class="text-gray-400 mt-3">
+                    Expert jetting and synchronization for peak performance.
+                </p>
+
+                <div class="flex justify-between items-center text-gray-300 mt-4">
+                    <span class="flex gap-2 items-center">
+                        <i class="fa fa-clock"></i> 3 hours
+                    </span>
+                    <span class="text-orange-500 text-xl font-bold">$120</span>
+                </div>
+
+     <a href="{% url 'services:book_service' 2 %}">
+    <button
+        class="w-full bg-white text-black mt-12 py-2 rounded-lg font-bold hover:bg-gray-300 transition">
+        <i class="fa fa-calendar"></i> Book Now
+    </button>
+</a>
+
+            </div>
+        </div>
+
+        <!-- Full Restoration Consultation -->
+        <div class="bg-[#0f0f0f] rounded-xl border border-gray-800 shadow-xl overflow-hidden">
+            <img src="{% static 'image/restore.jpg' %}" class="h-64 w-full object-cover opacity-90">
+
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold">Full Restoration Consultation</h2>
+                <p class="text-gray-400 mt-3">
+                    Assessment and planning for complete bike restoration.
+                </p>
+
+                <div class="flex justify-between items-center text-gray-300 mt-4">
+                    <span class="flex gap-2 items-center">
+                        <i class="fa fa-clock"></i> 1 hour
+                    </span>
+                    <span class="text-orange-500 text-xl font-bold">$100</span>
+                </div>
+
+               <a href="{% url 'services:book_service' 3 %}"
+   class="w-full block text-center bg-white text-black mt-12 py-2 rounded-lg font-bold hover:bg-gray-300 transition">
+    <i class="fa fa-calendar"></i> Book Now
+</a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
