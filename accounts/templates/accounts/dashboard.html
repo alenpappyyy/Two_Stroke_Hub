@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+<aside class="w-72 bg-[#141414] p-6 border-r border-gray-800 flex flex-col">
+ 
+    
+            <!-- User Profile -->
+<div class="flex items-center space-x-4 mb-8">
+    <div class="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center text-xl font-bold">
+
+    </div>
+    <div>
+        <h2 class="text-lg font-semibold">{{ user.username|default:"John Doe" }}</h2>
+        <p class="text-sm text-gray-400">Member since {{ user.date_joined|date:"Y" }}</p>
+    </div>
+</div>
+
+        <!-- Navigation Menu -->
+        <nav class="flex-1 space-y-2">
+            <a href="#" class="flex items-center space-x-3 px-4 py-2 bg-[#1E1E1E] rounded-lg">
+                <span>👤</span> <span>Profile</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-4 py-2 hover:bg-[#1E1E1E] rounded-lg">
+                <span>📦</span> <span>My Listings</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-4 py-2 hover:bg-[#1E1E1E] rounded-lg">
+                <span>❤️</span> <span>Favorites</span>
+            </a>
+            <a href="#" class="flex items-center space-x-3 px-4 py-2 hover:bg-[#1E1E1E] rounded-lg">
+                <span>⚙️</span> <span>Settings</span>
+            </a>
+        </nav>
+
+
+
+                <!-- Logout -->
+
+
+                <a href="#" class="mt-8 flex items-center space-x-3 text-red-500 px-4 py-2 hover:bg-[#1E1E1E] rounded-lg">
+            <span>➡️</span> <span>Logout</span>
+        </a>
+</aside>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+
+    <main class="flex-1 p-10">
+
+
+                <!-- Dashboard Title -->
+<h1 class="text-4xl font-bold mb-8">Dashboard</h1>
+
+        <!-- TOP CARDS -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+
+                <!-- Active Listings -->
+
+                <div class="bg-[#141414] p-6 rounded-xl border border-gray-800">
+                    <p class="text-gray-400">Active Listings</p>
+                    <p class="text-4xl font-bold mt-2">{{ active_listings }}</p>
+                </div>
+
+                            <!-- Total Sales -->
+  <div class="bg-[#141414] p-6 rounded-xl border border-gray-800">
+                    <p class="text-gray-400">Total Sales</p>
+                    <p class="text-4xl font-bold mt-2">{{ total_sales }}</p>
+                </div>
+
+                         <!-- Messages -->
+   
+ <div class="bg-[#141414] p-6 rounded-xl border border-gray-800">
+                    <p class="text-gray-400">Messages</p>
+                    <p class="text-4xl font-bold mt-2">{{ messages_count }}</p>
+                </div>
+</div>
+
+
+
+        <!-- Recent Activity -->
+<div class="bg-[#141414] p-8 rounded-xl border border-gray-800">
+<h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
+
+{% if recent_activity %}
+                <ul class="space-y-3">
+                    {% for activity in recent_activity %}
+                        <li class="p-3 bg-[#1E1E1E] rounded-lg">{{ activity }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-gray-400 text-center py-10">No recent activity to show.</p>
+            {% endif %}
+</div>
+</main>
+</div>
+
+
+
+
+{% endblock %}
