@@ -1,0 +1,42 @@
+{% extends "bikes/base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">📊 Admin Dashboard</h1>
+
+<!-- STATS -->
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+
+    <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-xl">
+        <p class="text-zinc-400">Total Bikes</p>
+        <p class="text-4xl font-bold text-orange-500">{{ total_bikes }}</p>
+    </div>
+
+    <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-xl">
+        <p class="text-zinc-400">Watchlist Items</p>
+        <p class="text-4xl font-bold text-pink-500">{{ watchlist_count }}</p>
+    </div>
+
+    <div class="bg-zinc-900 border border-zinc-800 p-6 rounded-xl">
+        <p class="text-zinc-400">Most Viewed</p>
+        <p class="text-sm text-zinc-400 mt-2">Top 5 Bikes</p>
+    </div>
+
+</div>
+
+<!-- MOST VIEWED BIKES -->
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+    <h2 class="text-xl font-semibold mb-4">🔥 Most Viewed Bikes</h2>
+
+    <ul class="space-y-3">
+        {% for bike in most_viewed %}
+            <li class="flex justify-between border-b border-zinc-800 pb-2">
+                <span>{{ bike.name }}</span>
+                <span class="text-zinc-400">{{ bike.views }} views</span>
+            </li>
+        {% empty %}
+            <li class="text-zinc-500">No data yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

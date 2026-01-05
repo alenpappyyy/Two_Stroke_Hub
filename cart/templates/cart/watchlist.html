@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Watchlist{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6">Your Watchlist</h1>
+
+  {% if watchlist_items %}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {% for w in watchlist_items %}
+      <div class="bg-white shadow rounded-lg p-4 flex gap-4 items-center">
+        {% if w.product.image %}
+          <img src="{{ w.product.image.url }}" alt="{{ w.product.name }}" class="w-20 h-20 object-cover rounded"/>
+        {% else %}
+          <div class="w-20 h-20 bg-gray-100 rounded flex items-center justify-center text-sm">No image</div>
+        {% endif %}
+
+        <div class="flex-1">
+          <div class="font-semibold">{{ w.product.name }}</div>
+          <div class="text-sm text-gray-500">₹{{ w.product.price }}</div>
+          <div class="mt-2 flex gap-2">
+            <a href="{% url 'add_to_cart' w.product.id %}" class="px-3 py-1 bg-blue-600 text-white rounded text-sm">Add to Cart</a>
+            <a href="{% url 'product_detail' w.product.id %}" class="px-3 py-1 border rounded text-sm">View</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center py-12">
+      <p class="text-gray-600">No items in your watchlist yet.</p>
+      <a href="{% url 'marketplace_home' %}" class="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded">Explore products</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

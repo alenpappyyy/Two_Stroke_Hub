@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="max-w-5xl mx-auto py-8">
+  <h1 class="text-2xl font-bold mb-4">My Posts</h1>
+
+  <div class="mb-6 flex gap-4">
+    <a href="{% url 'blog_create' %}" class="bg-green-500 text-white px-4 py-2 rounded">New Post</a>
+  </div>
+
+  <div class="grid gap-4">
+    {% for p in posts %}
+      <div class="bg-white p-4 rounded shadow flex justify-between items-center">
+        <div>
+          <a href="{% url 'blog_detail' p.slug %}" class="font-semibold">{{ p.title }}</a>
+          <div class="text-sm text-gray-500">Created: {{ p.created_at|date:"M d, Y" }}</div>
+        </div>
+        <div class="flex gap-2">
+          <a href="{% url 'blog_edit' p.slug %}" class="px-3 py-1 border rounded">Edit</a>
+          <a href="{% url 'blog_delete' p.slug %}" class="px-3 py-1 border rounded text-red-600">Delete</a>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-gray-600">You haven't created any posts yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+<form method="get" class="flex flex-wrap gap-4 bg-zinc-900 p-4 rounded-lg border border-zinc-800">
+    <input type="text" name="q" placeholder="Search bike..."
+           class="bg-zinc-800 px-4 py-2 rounded outline-none">
+
+    <select name="brand" class="bg-zinc-800 px-4 py-2 rounded">
+        <option value="">Brand</option>
+        {% for brand in brands %}
+            <option value="{{ brand }}">{{ brand }}</option>
+        {% endfor %}
+    </select>
+
+    <button class="bg-orange-600 px-6 py-2 rounded hover:bg-orange-700">
+        Filter
+    </button>
+</form>

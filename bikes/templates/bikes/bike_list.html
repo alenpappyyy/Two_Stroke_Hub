@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Bikes | Two Stroke Hub{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-6">🏍️ Available Bikes</h1>
+
+<!-- 🔍 Filters -->
+<form method="get" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <input type="text" name="q" placeholder="Search bikes..."
+           value="{{ request.GET.q }}"
+           class="px-4 py-2 rounded bg-zinc-900 border border-zinc-700">
+
+    <select name="category" class="px-4 py-2 rounded bg-zinc-900 border border-zinc-700">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.slug }}"
+                {% if request.GET.category == cat.slug %}selected{% endif %}>
+                {{ cat.name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="number" name="min_price"
+           value="{{ request.GET.min_price }}"
+           placeholder="Min price"
+           class="px-4 py-2 rounded bg-zinc-900 border border-zinc-700">
+
+    <button class="bg-orange-600 rounded px-4 py-2 hover:bg-orange-700">
+        Filter
+    </button>
+</form>
+
+<!-- 🧱 Bike Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {% for bike in bikes %}
+        {% include "bike_card.html" %}
+    {% empty %}
+        <p class="text-zinc-400">No bikes found.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

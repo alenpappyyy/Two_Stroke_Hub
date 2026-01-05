@@ -1,0 +1,18 @@
+{% extends "bikes/base.html" %}
+{% block title %}Compare Bikes{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">🆚 Compare Bikes</h1>
+
+{% if bikes|length < 2 %}
+    <p class="text-zinc-400">Add at least 2 bikes to compare.</p>
+{% else %}
+<div class="grid md:grid-cols-{{ bikes|length }} gap-6">
+
+    {% for bike in bikes %}
+        {% include "bikes/components/compare_card.html" %}
+    {% endfor %}
+
+</div>
+{% endif %}
+{% endblock %}

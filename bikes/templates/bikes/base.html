@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- ✅ Mobile responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Two Stroke Hub{% endblock %}</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col">
+
+ <nav class="bg-zinc-900 border-b border-zinc-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+      <a href="{% url 'bikes:bike_list' %}"
+   class="text-xl font-bold text-orange-500 hover:text-orange-400 transition">
+    Two Stroke <span class="text-white">Hub</span>
+</a>
+
+        <!-- Mobile Button -->
+        <button id="menuBtn"
+                class="md:hidden text-zinc-300 focus:outline-none">
+            ☰
+        </button>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-6 items-center">
+<a href="{% url 'bikes:bike_list' %}" class="hover:text-orange-400">Bikes</a>
+<a href="{% url 'watchlist:watchlist' %}" class="hover:text-orange-400">❤️ Watchlist</a>
+<a href="{% url 'bikes:compare' %}" class="hover:text-orange-400">🆚 Compare</a>
+
+            {% if request.user.is_staff %}
+                <a href="{% url 'dashboard' %}" class="hover:text-orange-400">📊 Dashboard</a>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="text-red-400 hover:text-red-300">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="hover:text-orange-400">Login</a>
+            {% endif %}
+
+           <a href="{% url 'bikes:bike_create' %}"
+   class="bg-orange-600 px-4 py-2 rounded-lg hover:bg-orange-700 transition font-medium">
+    ➕ Add Bike
+</a>
+
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 space-y-3">
+<a href="{% url 'bikes:bike_list' %}" class="block hover:text-orange-400">
+    Bikes
+</a>
+
+<a href="{% url 'watchlist:watchlist' %}" class="block hover:text-orange-400">
+    ❤️ Watchlist
+</a>
+
+<a href="{% url 'bikes:compare' %}" class="block hover:text-orange-400">
+    🆚 Compare
+</a>
+
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="block text-red-400">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="block hover:text-orange-400">Login</a>
+        {% endif %}
+    </div>
+</nav>
+
+            <!-- Mobile menu label -->
+           <span class="md:hidden text-zinc-400 text-sm">
+    Menu
+</span>
+
+        </div>
+    </nav>
+
+    <!-- 🧠 MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl mx-auto p-6 w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-zinc-500 text-sm py-6 border-t border-zinc-800">
+        © 2025 Two Stroke Hub • Built for 2-Stroke Legends 🏍️
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+
+
+<script>
+    const btn = document.getElementById("menuBtn");
+    const menu = document.getElementById("mobileMenu");
+
+    btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+    });
+</script>

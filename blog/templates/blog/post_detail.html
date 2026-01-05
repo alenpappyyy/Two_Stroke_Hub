@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto py-8">
+  <article>
+    <h1 class="text-3xl font-bold mb-2">{{ post.title }}</h1>
+    <p class="text-sm text-gray-400 mb-4">by {{ post.author }} • {{ post.created_at|date:"M j, Y" }}</p>
+    {% if post.image %}
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="w-full object-cover rounded mb-4">
+    {% endif %}
+    <div class="prose max-w-none">{{ post.content|linebreaks }}</div>
+  </article>
+
+  <div class="mt-6 flex gap-3">
+    {% if user.is_authenticated and (user == post.author or user.is_staff) %}
+      <a href="{% url 'blog:post_update' post.slug %}" class="px-3 py-2 border rounded">Edit</a>
+      <form action="{% url 'blog:post_delete' post.slug %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="px-3 py-2 bg-red-600 text-white rounded">Delete</button>
+      </form>
+    {% endif %}
+    <a href="{% url 'blog:post_list' %}" class="px-3 py-2 border rounded">Back to list</a>
+  </div>
+</div>
+{% endblock %}

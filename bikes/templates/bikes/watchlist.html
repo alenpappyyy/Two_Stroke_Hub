@@ -1,0 +1,32 @@
+{% for item in items %}
+    <div class="flex gap-4 bg-zinc-900 border border-zinc-800 p-4 rounded-xl items-center hover:shadow-lg transition">
+
+        <!-- 🖼️ Bike Image -->
+        <div class="w-24 h-20 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0">
+            {% if item.bike.image %}
+                <img src="{{ item.bike.image.url }}"
+                     alt="{{ item.bike.name }}"
+                     class="w-full h-full object-cover">
+            {% else %}
+                <div class="w-full h-full flex items-center justify-center text-xs text-zinc-500">
+                    No Image
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- 🏍️ Bike Info -->
+        <div class="flex-1">
+            <h3 class="font-semibold text-lg">{{ item.bike.name }}</h3>
+            <p class="text-orange-500 font-bold">₹{{ item.bike.price }}</p>
+        </div>
+
+        <!-- 🔗 Action -->
+        <a href="{% url 'bikes:bike_detail' item.bike.id %}"
+           class="text-sm text-orange-400 hover:underline">
+            View
+        </a>
+
+    </div>
+{% empty %}
+    <p class="text-zinc-400">Your watchlist is empty ❤️</p>
+{% endfor %}

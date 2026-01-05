@@ -1,0 +1,6 @@
+<form method="post" action="{% url 'toggle_compare' bike.id %}">
+    {% csrf_token %}
+    <button class="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition">
+        🆚 Compare
+    </button>
+</form>

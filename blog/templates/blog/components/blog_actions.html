@@ -1,0 +1,13 @@
+{% if request.user == post.author or request.user.is_staff %}
+    <div class="mt-10 flex gap-4">
+        <a href="{% url 'blog:edit' post.slug %}"
+           class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700">
+            Edit
+        </a>
+
+        <a href="{% url 'blog:delete' post.slug %}"
+           class="bg-red-600 px-4 py-2 rounded hover:bg-red-700">
+            Delete
+        </a>
+    </div>
+{% endif %}

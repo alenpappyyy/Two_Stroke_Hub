@@ -1,0 +1,39 @@
+<div class="bg-zinc-900 border border-zinc-800 rounded-xl p-4 hover:shadow-lg transition">
+
+    <!-- 🖼️ Bike Image -->
+    <div class="rounded-lg overflow-hidden mb-4 bg-zinc-800">
+        {% if bike.image %}
+            <img src="{{ bike.image.url }}"
+                 alt="{{ bike.name }}"
+                 class="w-full h-40 object-cover">
+        {% else %}
+            <div class="h-40 flex items-center justify-center text-zinc-500 text-sm">
+                No Image
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- 🏍️ Bike Info -->
+    <h2 class="text-xl font-bold">{{ bike.name }}</h2>
+    <p class="text-zinc-400 text-sm mb-3">
+        {{ bike.brand }} • {{ bike.year }}
+    </p>
+
+    <ul class="space-y-1 text-sm mb-4">
+        <li><span class="text-zinc-400">Price:</span> ₹{{ bike.price }}</li>
+        <li><span class="text-zinc-400">Engine:</span> {{ bike.engine_cc }} cc</li>
+        <li><span class="text-zinc-400">Power:</span> {{ bike.power }} HP</li>
+        <li><span class="text-zinc-400">Mileage:</span> {{ bike.mileage }} km/l</li>
+    </ul>
+
+    <!-- 🔗 Actions -->
+    <div class="flex justify-between items-center">
+        <a href="{% url 'bikes:bike_detail' bike.id %}"
+           class="text-orange-400 hover:underline text-sm">
+            View Details
+        </a>
+
+        {% include "bikes/components/watchlist_button.html" %}
+    </div>
+
+</div>

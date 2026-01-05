@@ -1,0 +1,17 @@
+{% extends "bikes/base.html" %}
+{% block title %}Bike Form{% endblock %}
+
+{% block content %}
+<h2 class="text-3xl font-bold mb-6">➕ Add / Edit Bike</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="bg-orange-600 px-4 py-2 rounded hover:bg-orange-700">
+        Save Bike
+    </button>
+</form>
+
+{% endblock %}

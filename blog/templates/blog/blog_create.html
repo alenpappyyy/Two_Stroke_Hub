@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 bg-white shadow p-8 rounded">
+    <h2 class="text-3xl font-bold mb-6">Create New Blog Post</h2>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Title -->
+        <div>
+            <label class="block text-lg font-semibold mb-1">Title</label>
+            {{ form.title }}
+        </div>
+
+        <!-- Slug -->
+        <div>
+            <label class="block text-lg font-semibold mb-1">Slug</label>
+            {{ form.slug }}
+        </div>
+
+        <!-- Content -->
+        <div>
+            <label class="block text-lg font-semibold mb-1">Content</label>
+            {{ form.content }}
+        </div>
+
+        <!-- Image -->
+        <div>
+            <label class="block text-lg font-semibold mb-1">Image</label>
+            {{ form.image }}
+        </div>
+
+        <!-- Submit -->
+        <button 
+            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 w-full">
+            Create Post
+        </button>
+    </form>
+</div>
+{% endblock %}

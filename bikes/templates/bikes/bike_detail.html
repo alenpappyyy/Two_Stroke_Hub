@@ -1,0 +1,60 @@
+{% extends "bikes/base.html" %}
+{% block title %}{{ bike.name }} | Two Stroke Hub{% endblock %}
+
+{% block content %}
+
+<div class="grid md:grid-cols-2 gap-10">
+
+    <!-- 🖼️ Bike Image -->
+    <div class="rounded-xl overflow-hidden bg-zinc-900 shadow-lg">
+        {% if bike.image %}
+            <img src="{{ bike.image.url }}"
+                 alt="{{ bike.name }}"
+                 class="w-full h-[420px] object-cover">
+        {% else %}
+            <div class="h-[420px] flex items-center justify-center text-zinc-500">
+                No Image Available
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- ℹ️ Bike Info -->
+    <div>
+        <h1 class="text-4xl font-bold mb-2">{{ bike.name }}</h1>
+
+        <p class="text-zinc-400 mb-4">
+            {{ bike.brand }} • {{ bike.year }}
+        </p>
+
+        <p class="text-lg mb-6">
+            {{ bike.description }}
+        </p>
+
+        <div class="text-2xl text-orange-500 font-bold mb-6">
+            ₹{{ bike.price }}
+        </div>
+
+        <!-- ❤️ Watchlist -->
+        <div class="flex gap-4 mb-8">
+            {% include "bikes/components/watchlist_button.html" %}
+        </div>
+
+        <!-- ✏️ Seller Actions -->
+        {% if request.user == bike.seller %}
+        <div class="flex gap-4">
+            <a href="{% url 'bikes:edit_bike' bike.id %}"
+               class="bg-blue-600 px-6 py-2 rounded hover:bg-blue-700">
+                Edit
+            </a>
+
+            <a href="{% url 'bikes:delete_bike' bike.id %}"
+               class="bg-red-600 px-6 py-2 rounded hover:bg-red-700">
+                Delete
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}
