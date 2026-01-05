@@ -1,0 +1,18 @@
+{% extends "forum/base_forum.html" %}
+{% block forum_content %}
+<h1 class="text-2xl font-bold">{{ category.name }}</h1>
+<p class="text-gray-400 mb-4">{{ category.description }}</p>
+
+<a href="{% url 'forum:create_thread' category.slug %}" class="bg-yellow-600 px-3 py-2 rounded inline-block mb-4">Create Thread</a>
+
+<ul class="space-y-3">
+  {% for thread in threads %}
+  <li class="p-3 border rounded hover:bg-gray-900">
+    <a href="{% url 'forum:thread_detail' category.slug thread.slug %}" class="text-lg font-semibold">{{ thread.title }}</a>
+    <div class="text-sm text-gray-500">by {{ thread.creator }} • {{ thread.created_at|date:"M j, Y" }}</div>
+  </li>
+  {% empty %}
+  <li>No threads yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

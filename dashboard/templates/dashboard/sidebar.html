@@ -1,0 +1,57 @@
+{% load nav_active %}
+
+<aside class="w-64 bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+    <!-- Logo -->
+    <div class="p-6 text-xl font-bold border-b border-gray-700">
+        TwoStroke Hub
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 p-4 space-y-2">
+
+        <!-- Dashboard -->
+        <a href="{% url 'dashboard:dashboard' %}"
+           class="block px-4 py-2 rounded hover:bg-gray-800 {% active request 'dashboard' %}">
+            📊 Dashboard
+        </a>
+
+        <!-- My Bikes -->
+        <a href="{% url 'dashboard:my_listings' %}"
+           class="block px-4 py-2 rounded hover:bg-gray-800 {% active request 'my_listings' %}">
+            🏍️ My Bikes
+        </a>
+
+        <!-- Watchlist -->
+        <a href="{% url 'dashboard:watchlist' %}"
+           class="block px-4 py-2 rounded hover:bg-gray-800 {% active request 'watchlist' %}">
+            ⭐ Watchlist
+        </a>
+
+        <!-- Notifications (NO namespace used) -->
+        <a href="/notifications/"
+           class="block px-4 py-2 rounded hover:bg-gray-800">
+            🔔 Notifications
+        </a>
+
+        <!-- Profile -->
+        <a href="{% url 'dashboard:profile' %}"
+           class="block px-4 py-2 rounded hover:bg-gray-800 {% active request 'profile' %}">
+            👤 Profile
+        </a>
+
+        <!-- Seller Section -->
+        {% if request.user.profile.is_seller %}
+            <div class="pt-4 mt-4 border-t border-gray-700 text-xs uppercase text-gray-400">
+                Seller
+            </div>
+
+            <a href="{% url 'dashboard:my_listings' %}"
+               class="block px-4 py-2 rounded hover:bg-gray-800">
+                📦 Seller Listings
+            </a>
+        {% endif %}
+
+    </nav>
+
+</aside>

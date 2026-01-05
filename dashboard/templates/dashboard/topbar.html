@@ -1,0 +1,160 @@
+<header class="bg-white dark:bg-gray-800 shadow px-6 py-4 flex justify-between items-center"
+        x-data="topbar()" x-init="init()">
+
+    <!-- Page Title -->
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+        {% block page_title %}Dashboard{% endblock %}
+    </h2>
+
+    <div class="flex items-center gap-4 relative">
+
+        <!-- 🌙 Dark Mode -->
+        <button @click="toggleDark"
+                class="p-2 rounded bg-gray-200 dark:bg-gray-700">
+            🌙
+        </button>
+
+        <!-- 🔔 Notifications (only show when count > 0) -->
+        <template x-if="count > 0">
+            <div class="relative">
+
+                <button @click="toggleNotif"
+                        :class="shake ? 'animate-shake' : ''"
+                        class="relative p-2 rounded bg-gray-200 dark:bg-gray-700 transition">
+                    🔔
+                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1"
+                          x-text="count"></span>
+                </button>
+
+                <!-- Dropdown / Mobile Panel -->
+                <div x-show="openNotif"
+                     x-transition
+                     @click.outside="openNotif = false"
+                     class="fixed md:absolute right-0 top-0 md:top-auto
+                            w-full md:w-72 h-full md:h-auto
+                            bg-white dark:bg-gray-800 shadow z-50">
+
+                    <div class="flex justify-between items-center p-4 border-b">
+                        <span class="font-semibold">Notifications</span>
+
+                        <button @click="toggleMute"
+                                class="text-xs text-gray-500 hover:text-red-500">
+                            <span x-text="mute ? '🔕 Muted' : '🔔 Mute'"></span>
+                        </button>
+                    </div>
+
+                    <template x-for="item in items" :key="item.id">
+                        <div class="p-4 text-sm border-b hover:bg-gray-100 dark:hover:bg-gray-700">
+                            <p x-text="item.message"></p>
+                        </div>
+                    </template>
+
+                    <div x-show="items.length === 0"
+                         class="p-4 text-sm text-gray-500 text-center">
+                        No notifications
+                    </div>
+
+                    <a href="/notifications/"
+                       class="block p-3 text-center text-sm text-blue-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        View all
+                    </a>
+                </div>
+            </div>
+        </template>
+
+        <!-- 👤 Profile -->
+        <div class="relative">
+            <button @click="openProfile = !openProfile"
+                    class="flex items-center gap-2">
+
+                <img src="{% if request.user.profile.avatar %}{{ request.user.profile.avatar.url }}{% else %}/static/images/default_avatar.png{% endif %}"
+                     class="w-9 h-9 rounded-full object-cover">
+
+                <span class="text-sm hidden md:block text-gray-800 dark:text-gray-100">
+                    {{ request.user.username }}
+                </span>
+            </button>
+
+            <div x-show="openProfile"
+                 @click.outside="openProfile = false"
+                 class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow rounded">
+
+                <a href="{% url 'dashboard:profile' %}"
+                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    Profile
+                </a>
+
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        🚪 Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<script>
+function topbar() {
+    return {
+        openNotif: false,
+        openProfile: false,
+        items: [],
+        count: 0,
+        shake: false,
+        mute: localStorage.getItem("muteNotif") === "true",
+
+        init() {
+            this.connectWS();
+        },
+
+        connectWS() {
+            try {
+                const protocol = location.protocol === "https:" ? "wss" : "ws";
+                const socket = new WebSocket(`${protocol}://${location.host}/ws/notifications/`);
+
+                socket.onmessage = (e) => {
+                    if (this.mute) return;
+
+                    const data = JSON.parse(e.data);
+                    this.items.unshift(data);
+                    this.count++;
+                    this.triggerShake();
+                };
+            } catch {
+                console.warn("WebSocket failed");
+            }
+        },
+
+        toggleNotif() {
+            this.openNotif = !this.openNotif;
+            if (this.openNotif) this.count = 0;
+        },
+
+        triggerShake() {
+            this.shake = true;
+            setTimeout(() => this.shake = false, 600);
+        },
+
+        toggleMute() {
+            this.mute = !this.mute;
+            localStorage.setItem("muteNotif", this.mute);
+        },
+
+        toggleDark() {
+            document.documentElement.classList.toggle("dark");
+            localStorage.theme =
+                document.documentElement.classList.contains("dark")
+                    ? "dark" : "light";
+        }
+    }
+}
+
+// Persist dark mode
+if (localStorage.theme === "dark") {
+    document.documentElement.classList.add("dark");
+}
+</script>

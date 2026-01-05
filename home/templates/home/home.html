@@ -1,0 +1,110 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Two-Stroke Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            margin: 0;
+        }
+        .hero {
+            padding: 60px;
+            text-align: center;
+            background: #000;
+        }
+        .hero h1 {
+            font-size: 48px;
+            color: orange;
+            margin-bottom: 10px;
+        }
+        .search-box input {
+            padding: 12px;
+            width: 60%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+        .bikes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .bike {
+            background: #1c1c1c;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .bike img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .price {
+            color: orange;
+            font-weight: bold;
+        }
+        a {
+            color: orange;
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Two-Stroke Hub</h1>
+    <p>Buy • Sell • Restore • Ride</p>
+
+```
+<form method="get" class="search-box">
+    <input type="search" name="q" placeholder="Search bikes..." value="{{ query|default:'' }}">
+</form>
+
+{% if user.is_authenticated %}
+    <p>Welcome back, <strong>{{ user.username }}</strong> 👋</p>
+    <a href="{% url 'dashboard:home' %}">Seller Dashboard</a>
+{% else %}
+    <p>
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'accounts:register' %}">Register</a>
+    </p>
+{% endif %}
+```
+
+</div>
+
+<h2 style="text-align:center;">🔥 Featured Bikes</h2>
+
+<div class="bikes">
+    {% for bike in featured_bikes %}
+        <div class="bike">
+            {% if bike.image %}
+                <img src="{{ bike.image.url }}" alt="{{ bike.title }}">
+            {% else %}
+                <img src="{% static 'images/bike-placeholder.png' %}" alt="No image">
+            {% endif %}
+
+```
+        <h3>{{ bike.title }}</h3>
+        <p>{{ bike.brand }} • {{ bike.year }}</p>
+        <p class="price">₹ {{ bike.price }}</p>
+        <a href="{% url 'bikes:detail' bike.id %}">View Bike</a>
+    </div>
+{% empty %}
+    <p style="text-align:center;">No bikes available</p>
+{% endfor %}
+```
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% for bike in featured %}
+<div class="bg-neutral-900 p-4 rounded-lg shadow">
+    <img src="{{ bike.image.url }}" class="rounded-lg mb-3">
+    <h3 class="text-lg font-bold">{{ bike.title }}</h3>
+    <p class="text-gray-400 text-sm">{{ bike.subtitle }}</p>
+    <p class="mt-2 text-orange-500 font-semibold">{{ bike.price }}</p>
+</div>
+{% endfor %}
+{% for item in sidebar %}
+<div class="bg-neutral-900 p-4 rounded-lg shadow">
+    <img src="{{ item.image.url }}" class="rounded-lg mb-3">
+    <h3 class="font-bold">{{ item.title }}</h3>
+    <p class="text-gray-400 text-sm">{{ item.subtitle }}</p>
+    <p class="text-orange-500 mt-2">{{ item.price }}</p>
+</div>
+{% endfor %}
+
+{% for product in megamart %}
+<div class="bg-neutral-800 p-3 rounded-lg">
+    <img src="{{ product.image.url }}" class="rounded mb-2">
+    <h3 class="font-bold text-sm">{{ product.title }}</h3>
+    <p class="text-gray-400 text-xs">{{ product.subtitle }}</p>
+    <p class="text-orange-500">{{ product.price }}</p>
+</div>
+{% endfor %}
+{% for product in msamart %}
+<div class="bg-neutral-800 p-3 rounded-lg">
+    <img src="{{ product.image.url }}" class="rounded mb-2">
+    <h3 class="font-bold text-sm">{{ product.title }}</h3>
+    <p class="text-gray-400 text-xs">{{ product.subtitle }}</p>
+    <p class="text-orange-500">{{ product.price }}</p>
+</div>
+{% endfor %}
+<div class="bg-neutral-900 p-4 rounded-lg shadow">
+    <img src="{{ blog.image.url }}" class="rounded mb-3">
+    <h3 class="font-bold text-xl mb-2">{{ blog.title }}</h3>
+    <p class="text-gray-400 text-sm leading-relaxed">{{ blog.description }}</p>
+</div>
+<ul class="space-y-3 text-gray-300 text-sm">
+    {% for item in owners_group %}
+        <li class="hover:text-orange-500 cursor-pointer">{{ item.title }}</li>
+    {% endfor %}
+</ul>

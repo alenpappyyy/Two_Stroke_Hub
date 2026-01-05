@@ -1,0 +1,60 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block title %}Edit Profile | Two Stroke Hub{% endblock %}
+{% block page_title %}Edit Profile{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-3xl bg-white dark:bg-gray-800 rounded-xl shadow p-6">
+
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+
+        <!-- Avatar -->
+        <div class="flex items-center gap-6">
+            <img
+                src="{% if request.user.profile.avatar %}{{ request.user.profile.avatar.url }}{% else %}/static/images/default_avatar.png{% endif %}"
+                class="w-24 h-24 rounded-full object-cover border"
+            >
+
+            <div>
+                <label class="block text-sm font-medium mb-1">Profile Photo</label>
+                {{ profile_form.avatar }}
+            </div>
+        </div>
+
+        <!-- Username -->
+        <div>
+            <label class="block text-sm font-medium mb-1">Username</label>
+            {{ user_form.username }}
+        </div>
+
+        <!-- Email -->
+        <div>
+            <label class="block text-sm font-medium mb-1">Email</label>
+            {{ user_form.email }}
+        </div>
+
+        <!-- Bio -->
+        <div>
+            <label class="block text-sm font-medium mb-1">Bio</label>
+            {{ profile_form.bio }}
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-4">
+            <button type="submit"
+                    class="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg">
+                Save Changes
+            </button>
+
+            <a href="{% url 'dashboard:profile' %}"
+               class="px-6 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                Cancel
+            </a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

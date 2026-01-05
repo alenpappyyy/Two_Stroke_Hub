@@ -1,0 +1,45 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block title %}Watchlist | Two Stroke Hub{% endblock %}
+{% block page_title %}My Watchlist{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow">
+
+    {% if watchlist_items %}
+        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+
+            {% for item in watchlist_items %}
+                <div class="p-4 flex justify-between items-center">
+                    <div class="flex items-center gap-4">
+                        {% if item.bike.image %}
+                            <img src="{{ item.bike.image.url }}"
+                                 class="w-16 h-16 rounded object-cover">
+                        {% else %}
+                            <div class="w-16 h-16 bg-gray-300 rounded"></div>
+                        {% endif %}
+
+                        <div>
+                            <h3 class="font-semibold">{{ item.bike.name }}</h3>
+                            <p class="text-sm text-gray-500">
+                                ₹{{ item.bike.price }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <a href="{% url 'bikes:detail' item.bike.id %}"
+                       class="text-blue-600 hover:underline">
+                        View
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+    {% else %}
+        <p class="p-6 text-gray-500">Your watchlist is empty.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block title %}Profile | Two Stroke Hub{% endblock %}
+{% block page_title %}My Profile{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Profile Card -->
+<div class="bg-white dark:bg-gray-800 rounded-2xl shadow overflow-hidden max-w-4xl">
+
+    <!-- Cover -->
+    <div class="h-32 bg-gradient-to-r from-orange-500 to-yellow-400"></div>
+
+    <!-- Profile Info -->
+    <div class="p-6 -mt-16">
+        <div class="flex items-end gap-6">
+
+            <!-- Avatar -->
+            <div class="relative">
+                <img
+                    src="{% if request.user.profile.avatar %}{{ request.user.profile.avatar.url }}{% else %}/static/images/default_avatar.png{% endif %}"
+                    class="w-32 h-32 rounded-full border-4 border-white dark:border-gray-800 object-cover shadow"
+                >
+
+                <a href="{% url 'dashboard:edit_profile' %}"
+                   class="absolute bottom-2 right-2 bg-orange-500 hover:bg-orange-600 text-white text-xs px-3 py-1 rounded-full shadow">
+                    Edit
+                </a>
+            </div>
+
+            <!-- User Info -->
+            <div class="flex-1">
+                <h2 class="text-2xl font-bold">{{ request.user.username }}</h2>
+                <p class="text-gray-500 dark:text-gray-400">{{ request.user.email }}</p>
+                <p class="text-sm mt-1">
+                    Joined on {{ request.user.date_joined|date:"F d, Y" }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+            <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-xl text-center">
+                <h3 class="text-2xl font-bold">{{ my_bikes_count|default:"0" }}</h3>
+                <p class="text-sm text-gray-500">My Bikes</p>
+            </div>
+
+            <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-xl text-center">
+                <h3 class="text-2xl font-bold">{{ watchlist_count|default:"0" }}</h3>
+                <p class="text-sm text-gray-500">Watchlist</p>
+            </div>
+
+            <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-xl text-center">
+                <h3 class="text-2xl font-bold">{{ orders_count|default:"0" }}</h3>
+                <p class="text-sm text-gray-500">Orders</p>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="mt-8 border-t pt-6 dark:border-gray-700">
+            <h3 class="text-lg font-semibold mb-4">Profile Details</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <p><strong>Username:</strong> {{ request.user.username }}</p>
+                <p><strong>Email:</strong> {{ request.user.email }}</p>
+                <p><strong>Status:</strong> Active</p>
+                <p><strong>Role:</strong> {{ request.user.profile.role|default:"User" }}</p>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-8 flex flex-wrap gap-3">
+            <a href="{% url 'dashboard:edit_profile' %}"
+               class="px-5 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg shadow">
+                Edit Profile
+            </a>
+
+            <a href="{% url 'dashboard:my_listings' %}"
+               class="px-5 py-2 bg-gray-800 hover:bg-gray-900 text-white rounded-lg shadow">
+                My Listings
+            </a>
+
+            <a href="{% url 'dashboard:dashboard' %}"
+               class="px-5 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg">
+                Dashboard
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

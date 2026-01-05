@@ -1,0 +1,16 @@
+{% extends "forum/base_forum.html" %}
+{% block forum_content %}
+<h1 class="text-3xl font-bold mb-6">Forum</h1>
+
+<div class="grid gap-4">
+  {% for cat in categories %}
+  <a class="block p-4 border rounded hover:bg-gray-900" href="{% url 'forum:category_detail' cat.slug %}">
+    <h2 class="text-xl font-semibold">{{ cat.name }}</h2>
+    <p class="text-sm text-gray-400">{{ cat.description|default:"No description" }}</p>
+    <p class="text-sm text-gray-500 mt-1">{{ cat.threads.count }} threads</p>
+  </a>
+  {% empty %}
+  <p>No categories yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

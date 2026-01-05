@@ -1,0 +1,110 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block title %}Dashboard | Two Stroke Hub{% endblock %}
+{% block page_title %}Overview{% endblock %}
+
+{% block dashboard_content %}
+
+<div x-data="liveDashboard()" x-init="init()">
+
+    <!-- Stats -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
+            <p class="text-sm text-gray-500">My Bikes</p>
+            <h3 class="text-2xl font-bold" x-text="stats.total_bikes"></h3>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
+            <p class="text-sm text-gray-500">Watchlist</p>
+            <h3 class="text-2xl font-bold" x-text="stats.watchlisted_count"></h3>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
+            <p class="text-sm text-gray-500">Views</p>
+            <h3 class="text-2xl font-bold" x-text="stats.total_views"></h3>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow">
+            <p class="text-sm text-gray-500">Sold</p>
+            <h3 class="text-2xl font-bold" x-text="stats.sold_bikes"></h3>
+        </div>
+
+    </div>
+
+    <!-- Chart -->
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-6">
+        <h3 class="font-semibold mb-4">Bikes Added (Monthly)</h3>
+        <canvas id="viewsChart"></canvas>
+    </div>
+
+    <!-- Recent Listings -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow">
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 font-semibold">
+            Recent Bikes
+        </div>
+
+        <div class="divide-y divide-gray-200 dark:divide-gray-700">
+            {% for bike in recent_bikes %}
+                <div class="p-4 flex justify-between items-center">
+                    <div>
+                        <h4 class="font-medium">{{ bike.name }}</h4>
+                        <p class="text-sm text-gray-500">
+                            {{ bike.created_at|date:"M d, Y" }}
+                        </p>
+                    </div>
+                    <span class="text-green-600 font-semibold">
+                        ₹{{ bike.price }}
+                    </span>
+                </div>
+            {% empty %}
+                <p class="p-4 text-gray-500">No bikes yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+
+{% block extra_js %}
+<script>
+function liveDashboard() {
+    return {
+        stats: {
+            total_bikes: {{ total_bikes }},
+            active_bikes: {{ active_bikes }},
+            sold_bikes: {{ sold_bikes }},
+            total_views: {{ total_views }},
+            watchlisted_count: {{ watchlisted_count }},
+        },
+
+        init() {
+            const protocol = location.protocol === "https:" ? "wss" : "ws";
+            const socket = new WebSocket(
+                `${protocol}://${location.host}/ws/dashboard/`
+            );
+
+            socket.onmessage = (e) => {
+                this.stats = JSON.parse(e.data);
+            };
+        }
+    }
+}
+
+// Chart
+const ctx = document.getElementById("viewsChart");
+new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: {{ chart_labels|safe }},
+        datasets: [{
+            label: "Bikes Added",
+            data: {{ chart_data|safe }},
+            backgroundColor: "#3b82f6"
+        }]
+    }
+});
+</script>
+{% endblock %}

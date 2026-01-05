@@ -1,0 +1,49 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<style>
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+.animate-shake {
+    animation: shake 0.6s ease-in-out;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="flex min-h-screen bg-gray-100 dark:bg-gray-900"
+     x-data="{ sidebarOpen: false }">
+
+    <!-- 📱 Mobile Toggle Button -->
+    <button @click="sidebarOpen = !sidebarOpen"
+            class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-800 text-white rounded">
+        ☰
+    </button>
+
+    <!-- Sidebar -->
+    <aside :class="sidebarOpen ? 'block' : 'hidden md:block'"
+           class="w-64 bg-gray-900 text-gray-100 fixed md:static inset-y-0 z-40">
+        {% include "dashboard/sidebar.html" %}
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col md:ml-64">
+
+        <!-- Topbar -->
+        {% include "dashboard/topbar.html" %}
+
+        <!-- Page Content -->
+        <main class="flex-1 p-6 overflow-y-auto">
+            {% block dashboard_content %}{% endblock %}
+        </main>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "forum/base_forum.html" %}
+{% block forum_content %}
+<h1 class="text-2xl font-bold mb-4">Create Thread in {{ category.name }}</h1>
+
+<form method="post" class="space-y-4">
+  {% csrf_token %}
+  {{ thread_form.as_p }}
+  {{ post_form.as_p }}
+  <button class="bg-green-600 px-4 py-2 rounded">Create Thread</button>
+</form>
+{% endblock %}
