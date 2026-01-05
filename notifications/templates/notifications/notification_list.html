@@ -1,0 +1,20 @@
+{% extends "dashboard/base_dashboard.html" %}
+
+{% block title %}Notifications | Two Stroke Hub{% endblock %}
+{% block page_title %}Notifications{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="bg-white dark:bg-gray-800 rounded-lg shadow divide-y">
+
+    {% for notification in notifications %}
+        {% include "notifications/notification_item.html" %}
+    {% empty %}
+        <div class="p-6 text-center text-gray-500">
+            No notifications yet 🚀
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

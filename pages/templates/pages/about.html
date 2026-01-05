@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block page_title %}About Us{% endblock %}
+
+{% block content %}
+<section class="max-w-7xl mx-auto px-6 py-12">
+
+    <!-- Hero -->
+    <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white">
+            About Two-Stroke Hub 🏍
+        </h1>
+        <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            A dedicated platform built for two-stroke bike lovers — preserving legends,
+            connecting riders, and celebrating raw performance.
+        </p>
+    </div>
+
+    <!-- Mission / Vision -->
+    <div class="grid md:grid-cols-2 gap-10 mb-20">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow">
+            <h2 class="text-2xl font-semibold mb-3">🎯 Our Mission</h2>
+            <p class="text-gray-600 dark:text-gray-300">
+                To create the most trusted community and marketplace for two-stroke motorcycles,
+                parts, restorations, and knowledge.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow">
+            <h2 class="text-2xl font-semibold mb-3">🚀 Our Vision</h2>
+            <p class="text-gray-600 dark:text-gray-300">
+                Keep the two-stroke culture alive by empowering enthusiasts, sellers,
+                and builders through modern technology.
+            </p>
+        </div>
+    </div>
+
+    <!-- Why Two Stroke -->
+    <div class="mb-20">
+        <h2 class="text-3xl font-bold text-center mb-10">Why Two-Stroke?</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+                <h3 class="font-semibold text-xl mb-2">🔥 Raw Power</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    High power-to-weight ratio that delivers unmatched thrill.
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+                <h3 class="font-semibold text-xl mb-2">🛠 Simplicity</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Mechanical simplicity makes them easy to maintain and rebuild.
+                </p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+                <h3 class="font-semibold text-xl mb-2">❤️ Emotion</h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                    The sound, smell, and response create an emotional bond.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Features -->
+    <div class="mb-20">
+        <h2 class="text-3xl font-bold text-center mb-10">What We Offer</h2>
+
+        <div class="grid md:grid-cols-4 gap-6">
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow text-center">
+                🏍
+                <h4 class="font-semibold mt-2">Bike Listings</h4>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow text-center">
+                ⭐
+                <h4 class="font-semibold mt-2">Watchlists</h4>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow text-center">
+                🔔
+                <h4 class="font-semibold mt-2">Live Notifications</h4>
+            </div>
+
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow text-center">
+                🧑‍🔧
+                <h4 class="font-semibold mt-2">Seller Profiles</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team / Creator -->
+    <div class="bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-2xl p-12 text-center">
+        <h2 class="text-3xl font-bold mb-4">Built by Enthusiasts</h2>
+        <p class="max-w-3xl mx-auto text-gray-200">
+            Two-Stroke Hub is crafted by riders who understand the culture,
+            the machines, and the passion behind every rebuild and ride.
+        </p>
+    </div>
+
+</section>
+{% endblock %}

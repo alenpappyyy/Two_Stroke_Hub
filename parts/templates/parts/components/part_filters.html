@@ -1,0 +1,26 @@
+<form method="get"
+      class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 bg-zinc-900 p-4 rounded-xl border border-zinc-800">
+
+    <input type="text"
+           name="q"
+           value="{{ request.GET.q }}"
+           placeholder="Search parts..."
+           class="px-4 py-2 rounded bg-zinc-950 border border-zinc-700">
+
+    <select name="category"
+            class="px-4 py-2 rounded bg-zinc-950 border border-zinc-700">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat.slug }}">{{ cat.name }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="number"
+           name="max_price"
+           placeholder="Max price"
+           class="px-4 py-2 rounded bg-zinc-950 border border-zinc-700">
+
+    <button class="bg-orange-600 rounded px-4 py-2 hover:bg-orange-700">
+        Filter
+    </button>
+</form>

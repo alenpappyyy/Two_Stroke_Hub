@@ -1,0 +1,15 @@
+<h1>Bike Parts</h1>
+
+
+<form method="get">
+<input type="search" name="q" placeholder="Search parts">
+<button>Search</button>
+</form>
+
+
+{% for part in parts %}
+<div>
+<a href="{% url 'parts:part_detail' part.id %}">{{ part.name }}</a>
+₹{{ part.price }}
+</div>
+{% endfor %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="min-h-screen bg-black text-white px-6 py-20">
+
+    <!-- Hero -->
+    <div class="max-w-6xl mx-auto text-center mb-16">
+        <h1 class="text-5xl font-bold mb-4">Get in Touch 🏍</h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+            Have questions about bikes, listings, or partnerships?
+            We’re here to help keep the two-stroke culture alive.
+        </p>
+    </div>
+
+    <!-- Contact Cards -->
+    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mb-20">
+
+        <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 hover:border-red-500 transition">
+            <h3 class="text-xl font-semibold mb-2">📧 Email</h3>
+            <p class="text-gray-400">support@twostrokehub.com</p>
+            <p class="text-sm text-gray-500 mt-2">24–48 hour response</p>
+        </div>
+
+        <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 hover:border-red-500 transition">
+            <h3 class="text-xl font-semibold mb-2">📍 Location</h3>
+            <p class="text-gray-400">India</p>
+            <p class="text-sm text-gray-500 mt-2">Serving riders worldwide</p>
+        </div>
+
+        <div class="bg-gray-900 p-8 rounded-xl border border-gray-800 hover:border-red-500 transition">
+            <h3 class="text-xl font-semibold mb-2">🤝 Partnerships</h3>
+            <p class="text-gray-400">partners@twostrokehub.com</p>
+            <p class="text-sm text-gray-500 mt-2">Brands & sellers</p>
+        </div>
+
+    </div>
+
+    <!-- Contact Form -->
+    <div class="max-w-4xl mx-auto bg-gray-900 rounded-2xl p-10 border border-gray-800">
+
+        <h2 class="text-3xl font-bold mb-6 text-center">Send Us a Message</h2>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <input type="text" name="name" placeholder="Your Name"
+                       class="w-full bg-black border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-red-500"
+                       required>
+
+                <input type="email" name="email" placeholder="Your Email"
+                       class="w-full bg-black border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-red-500"
+                       required>
+            </div>
+
+            <input type="text" name="subject" placeholder="Subject"
+                   class="w-full bg-black border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-red-500"
+                   required>
+
+            <textarea name="message" rows="5" placeholder="Your Message"
+                      class="w-full bg-black border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-red-500"
+                      required></textarea>
+
+            <button type="submit"
+                    class="w-full py-3 bg-red-600 hover:bg-red-700 rounded font-semibold transition">
+                Send Message 🚀
+            </button>
+        </form>
+
+    </div>
+
+    <!-- Footer Note -->
+    <p class="text-center text-gray-600 mt-16 text-sm">
+        © {{ year|default:2025 }} Two-Stroke Hub. Built for riders.
+    </p>
+
+</section>
+{% endblock %}

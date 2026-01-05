@@ -1,0 +1,53 @@
+{% extends "bikes/base.html" %}
+{% block title %}{{ part.name }}{% endblock %}
+
+{% block content %}
+<div class="grid md:grid-cols-2 gap-10">
+
+    <!-- Image -->
+    <div class="rounded-xl overflow-hidden bg-zinc-900">
+        {% if part.image %}
+            <img src="{{ part.image.url }}"
+                 class="w-full h-[420px] object-cover">
+        {% endif %}
+    </div>
+
+    <!-- Info -->
+    <div>
+        <h1 class="text-4xl font-bold">{{ part.name }}</h1>
+        <p class="text-zinc-400 mt-2">{{ part.category }}</p>
+
+        <div class="mt-6 text-3xl font-bold text-orange-500">
+            ₹{{ part.price }}
+        </div>
+
+        <p class="mt-6 text-zinc-300">
+            {{ part.description }}
+        </p>
+
+        <!-- Specs -->
+        <ul class="mt-6 space-y-2 text-sm">
+            <li><span class="text-zinc-400">Compatibility:</span> {{ part.compatibility }}</li>
+            <li><span class="text-zinc-400">Material:</span> {{ part.material }}</li>
+            <li><span class="text-zinc-400">Brand:</span> {{ part.brand }}</li>
+        </ul>
+
+        <!-- Actions -->
+        <div class="mt-8 flex gap-4">
+            <button
+                hx-post="{% url 'parts:add_to_cart' part.id %}"
+                hx-swap="none"
+                class="bg-orange-600 px-6 py-3 rounded-lg hover:bg-orange-700">
+                Add to Cart
+            </button>
+
+            <button
+                hx-post="{% url 'parts:toggle_wishlist' part.id %}"
+                hx-swap="none"
+                class="border border-zinc-700 px-6 py-3 rounded-lg hover:bg-zinc-800">
+                ❤️ Wishlist
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
